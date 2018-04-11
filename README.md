@@ -14,8 +14,7 @@
   ​
 
 
-
-##Extra Credit
+## Extra Credit
 
 * Login page.
 * Request with token auth.
