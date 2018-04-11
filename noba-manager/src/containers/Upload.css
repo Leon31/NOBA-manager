@@ -1,0 +1,8 @@
+.text-image {
+  display: flex;
+  flex-direction: row;
+}
+
+Dropzone {
+  display: inline-flex;
+}
