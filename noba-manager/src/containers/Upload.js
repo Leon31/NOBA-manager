@@ -20,34 +20,38 @@ class Upload extends Component {
   }
     onDrop = (acceptedFiles, rejectedFiles) => { 
       this.setState({
-        mainImage: acceptedFiles[0],
-        collection: acceptedFiles
-      }, () => console.log(this.state));
-
+        mainImage: this.state.collection[0] ? this.state.collection[0].preview : acceptedFiles[0].preview,
+        collection: [...this.state.collection, ...acceptedFiles]
+      });
     }
 
-    handleTitle = e => {
-      this.setState({title: e.target.value});
+    handleDelete = e => {
+      const currId = e.target.id
+      this.setState({
+        collection: this.state.collection.filter(image => {
+          return image.preview !== currId
+        })
+      }, () => {
+        if (this.state.mainImage === currId) {
+          this.setState({
+            mainImage: this.state.collection[0].preview
+          })
+        }
+      })
+      
     }
 
-    handleMaterial = e => {
-      this.setState({material: e.target.value});
+    handleChange = e => {
+      this.setState({
+        [e.target.name]: e.target.value,
+      })
     }
 
-    handleYear = e => {
-      this.setState({year: e.target.value});
-    }
-
-    handleHeight = e => {
-      this.setState({height: e.target.value});
-    }
-
-    handleWidth = e => {
-      this.setState({width: e.target.value});
-    }
-
-    handleClick = e => {
-
+    selectMain = e => {
+      console.log(e.target);
+      this.setState({
+        mainImage: e.target.src
+      })      
     }
 
     render() {
@@ -60,23 +64,23 @@ class Upload extends Component {
             <div className="text-fields">
               <div>
                 <label>Title:
-                  <input type="text" value={ state.title } onChange={this.handleTitle}/>
+                  <input type="text" value={ state.title } name="title" onChange={this.handleChange}/>
                 </label>
               </div>
               <div>
                 <label>Material:
-                  <input type="text" value={ state.material } onChange={this.handleMaterial}/>
+                  <input type="text" value={ state.material } name="material" onChange={this.handleChange}/>
                 </label>
               </div>
               <div>
                 <label>Year:
-                  <input type="number" value={ state.year } onChange={this.handleYear}/>
+                  <input type="number" value={ state.year } name="year" onChange={this.handleChange}/>
                 </label>
               </div>
               <div>
                 <label>Dimension:
-                  <input type="number" value={ state.height } onChange={this.handleHeight}/>
-                  <input type="number" value={ state.width } onChange={this.handleWidth}/>
+                  <input type="number" value={ state.height } name="height" onChange={this.handleChange}/>
+                  <input type="number" value={ state.width } name="width" onChange={this.handleChange}/>
                 </label>
               </div>
             </div>
@@ -91,6 +95,20 @@ class Upload extends Component {
             <button onClick={this.handleClick}>Upload</button>          
           </div>
         </form>
+        <div className="previews-container">
+          {this.state.collection.map( image => {
+            return(
+              <div className="preview-list" key={image.preview} >
+                <img 
+                  src={image.preview}
+                  alt={image.name}
+                  onClick={this.selectMain}
+                  className={this.state.mainImage === image.preview ? 'previews-selected previews' : 'previews'} />
+                <span onClick={this.handleDelete} id={image.preview} role="img" alt=''>🗑️</span>
+              </div>
+            )}
+          )}
+        </div>
       </div>
     );
   }
