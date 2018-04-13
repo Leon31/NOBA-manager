@@ -22,11 +22,14 @@ class App extends Component {
     axios.get('http://localhost:3002/getAll')
       .then(res => {
         console.log(res);
+        
         res = res.data.map(art => ({
           title: art.title.title,
           material: art.title.material,
           year: art.title.year,
-          mainImage: `data:image/jpeg;base64,${art.data}`,
+          mainImage: `data:image/jpeg;base64,${art.file.filter(item => {
+            return item.fieldname === 'main-image'
+          })[0].data}`,
           collection: art.file,
         }));
         this.setState({ artwork: res });
