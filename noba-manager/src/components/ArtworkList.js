@@ -1,9 +1,9 @@
 import React from 'react';
-import ArtworkItem from './ArtworkItem'
+import ArtworkItem from './ArtworkItem';
 
-import './ArtworkList.css'
+import './ArtworkList.css';
 
-export default function ArtworkList (props) {
+export default function ArtworkList(props) {
   const artworkArray = props.artworkArray.map((art, i) => {
     return (
       <div key={i}>
@@ -11,14 +11,15 @@ export default function ArtworkList (props) {
           title={art.title}
           material={art.material}
           year={art.year}
-          mainImage={art.mainImage}
+           mainImage={art.mainImage}
         />
       </div>
-    )
-  })
+    );
+  });
+
   return (
     <div className="artworkList">
       {artworkArray}
     </div>
-  )
+  );
 }
