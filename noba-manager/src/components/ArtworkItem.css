@@ -1,0 +1,29 @@
+.item-container {
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* flex-flow: wrap; */
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 150px;
+  height: 150px;
+  margin: 15px 3px;
+}
+
+.image-container {
+  width: 150px;
+  overflow: hidden;
+  height: 70px;
+  background-color: lightpink;
+}
+
+.image-container img {
+  width: 200px;
+
+  margin: -25px 0 0 -100px;
+}
+
+.title {
+  font-size: 1.1em;
+  overflow: hidden;
+  padding: 0px;
+}

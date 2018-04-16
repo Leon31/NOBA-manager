@@ -1,0 +1,29 @@
+.text-image {
+  display: flex;
+  flex-direction: row;
+}
+
+Dropzone {
+  display: inline-flex;
+}
+
+.previews {
+  max-height: 100px;
+  max-width: 100px;
+  margin: 10px;
+}
+
+.previews-container {
+  display: flex;
+  padding: 10px;
+}
+
+.preview-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.previews-selected {
+  border: 5px solid black;
+}
