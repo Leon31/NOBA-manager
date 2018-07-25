@@ -1,27 +1,36 @@
-.App {
-  text-align: center;
+.App{
+  padding: 2vh 3vw;
+}
+
+input, button{
+  outline: none;
 }
 
 .App-header {
   display: flex;
   background-color: rgb(255, 255, 255);
-  height: 50px;
-  padding: 10px;
+  height: 8vh;
+  margin-bottom: 60px
 }
+
 .Manager {
-  font-size: 10px;
+  display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
-.App-title {
-  font-size: 1.5em;
+.Manager h1 {
+  letter-spacing: 5px;
+  margin-bottom: 10px;
 }
 
-.App-intro {
-  font-size: large;
+.Manager h3 {
+  font-weight: 200;
+  margin: 0;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.artworkList {
+  display: flex;
+  flex-flow: wrap;
 }

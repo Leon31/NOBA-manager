@@ -2,52 +2,51 @@ import React, { Component } from 'react';
 import './App.css';
 import Upload from './Upload';
 import axios from 'axios';
-import ArtworkList from '../components/ArtworkList';
+import ArtworkItem from '../components/ArtworkItem';
 
 class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      artwork: []
+      artworks: []
     };
   }
 
   componentDidMount () {
     this.getArtwork();
-    console.log(this.state);
-
   }
 
   getArtwork = () => {
-    axios.get('http://localhost:3002/getAll')
+    axios.get('https://noba-server.herokuapp.com/getAll')
       .then(res => {
-        console.log(res);
-        
-        res = res.data.map(art => ({
-          title: art.title.title,
-          material: art.title.material,
-          year: art.title.year,
-          mainImage: `data:image/jpeg;base64,${art.file.filter(item => {
-            return item.fieldname === 'main-image'
-          })[0].data}`,
-          collection: art.file,
-        }));
-        this.setState({ artwork: res });
+        this.setState({ artworks: res.data });
       });
   };
 
   render() {
-    console.log(this.state);
     return (
       <div className="App">
         <header className="App-header">
           <div className="Manager">
-            <p>NOBA</p>
-            <p>manager side</p>
+            <h1>NOBA</h1>
+            <h3>manager</h3>
           </div>
         </header>
-        <ArtworkList artworkArray={this.state.artwork} />
-        <Upload></Upload>
+        <Upload onUpload={this.getArtwork}></Upload>
+        <h1>Artworks</h1>
+        <div className="artworkList">
+          {this.state.artworks.map((artwork, i) => {
+            return (
+              <div key={i}>
+                <ArtworkItem
+                  onDelete={this.getArtwork}
+                  artwork={artwork}
+                />
+              </div>
+            )
+          })
+        }
+        </div>
       </div>
     );
   }
